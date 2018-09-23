@@ -8,22 +8,44 @@ Dark green: #28b485
 */
 
 /* universal selector */
-* {
+*,
+*::after,
+*::before {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   /* manually add in borders and padding this way */
 
+  box-sizing: inherit;
+  /* inherits from body?? */
+}
+
+/* root size gets declared here */
+html {
+  /* default 16px in most browsers */
+  /* font-size: 10px; */
+    /* set to 10 b/c it's easy to calculate rem */
+    /* 1 rem is 10px now */
+  font-size: 62.5%;
+    /* never mind, setting font-size to 10px very bad practice */
+    /* think of people that zoom in... */
+    /* default is 16px; 62.5% of 16px is 10px; */
+    /* we can still keep rem now */
+    /* rem will still be in increments of 10px */
+    /* rem not supported in internet explore below 9 */
 }
 
 body {
   font-family: "Lato", sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  /* font-size: 16px; */
   line-height: 1.7;
   /* line-height double space triple space 1.5 space ms word */
   color: #777;
-  padding: 30px;
+  padding: 3rem;
+
+  box-sizing: border-box;
+  /* by default box-sizing width and height only considers content */
+  /* setting to border-box, width and height include padding */
 }
 
 .header {
@@ -48,22 +70,22 @@ body {
   /* https://www.w3schools.com/css/tryit.asp?filename=trycss_position_absolute */
 }
 
-.logo-box {
+.header__logo-box {
   position: absolute;
   /* the position is relative to the parent element */
   /* in this case the header class */
   /* so set its parent class to be in relative position*/
-  top: 40px;
-  left: 40px;
+  top: 4rem;
+  left: 4rem;
 
 }
 
-.logo {
-  height: 35px;
+.header__logo {
+  height: 3.5rem;
 }
 
 /* to center the heading */
-.text-box {
+.header__text-box {
   position: absolute;
   /* again, absolute to the parent, and make sure parent is positioned relatively */
   top: 40%;
@@ -88,18 +110,18 @@ body {
   backface-visibility: hidden;
   /* at end of animation, it jitters up to the top ever so slightly */
   /* this is the fix for that... */
-  margin-bottom: 60px;
+  margin-bottom: 6rem;
 }
 
 /* block-level elements: occupy entire width, they create line breaks before and after */
 /* span is inline by default, so we have to explicitly state that they will be displayed as blocks */
 /* to break up the title and the sub heading as two lines */
 
-.heading-primary-main {
+.heading-primary--main {
   display: block;
-  font-size: 60px;
+  font-size: 6rem;
   font-weight: 400;
-  letter-spacing: 35px;
+  letter-spacing: 3.5rem;
 
   animation-name: moveInLeft;
   animation-duration: 1s;
@@ -108,12 +130,12 @@ body {
   /* animation-iteration-count: 3; */
 }
 
-.heading-primary-sub {
+.heading-primary--sub {
   display: block;
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: 700;
   /* Lato loaded 100,300,400,700,900 via google fonts */
-  letter-spacing: 17.4px;
+  letter-spacing: 1.75rem;
   animation: moveInRight 1s ease-out;
   /* shorthand of the trio above */
 }
@@ -122,11 +144,11 @@ body {
   /* start point */
   0% {
     opacity: 0;
-    transform: translateX(-100px);
+    transform: translateX(-10rem);
   }
 
   80% {
-    transform: translateX(10px);
+    transform: translateX(1rem);
   }
 
   100% {
@@ -140,11 +162,11 @@ body {
   /* start point */
   0% {
     opacity: 0;
-    transform: translateX(100px);
+    transform: translateX(10rem);
   }
 
   80% {
-    transform: translateX(-10px);
+    transform: translateX(-1rem);
   }
 
   100% {
@@ -159,31 +181,34 @@ body {
 .btn:visited {
   text-transform: uppercase;
   text-decoration: none;
-  padding: 15px 40px;
+  padding: 1.5rem 4rem;
   display: inline-block;
   /* https://www.w3schools.com/css/css_inline-block.asp */
     /* inline-blocks respect padding specifications as opposed to inline*/
-  border-radius: 100px;
+  border-radius: 10rem;
   transition: all .2s;
     /* good for color change too */
   position: relative;
     /* for the .btn:after point of reference */
+  font-size: 1.6rem;
+    /* have to specify font size now since it inherits from root now */
+    /* unspecified it'd be 10px */
 }
 
 .btn:hover {
-  transform: translateY(-3px);
+  transform: translateY(-.3rem);
   /* down is up in css */
   /* this has button kick up */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, .2);
     /* x, y, blur, color */
     /* a subtle black shadow */
 }
 
 .btn:active {
-  transform: translateY(-1px);
+  transform: translateY(-.1rem);
   /* it goes down from hovering, but it's slightly above the default place */
   /* positioning is absolute kevin */
-  box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
     /* lessen the shadow so it looks like you clicked it */
 }
 
@@ -195,7 +220,7 @@ body {
 
 /* Compared to display: block, the major difference is that display: inline-block does not add a line-break after the element, so the element can sit next to other elements. */
 
-.btn-white {
+.btn--white {
   background-color: #fff;
   color: #777;
 }
@@ -217,7 +242,7 @@ body {
   transition: all .4s;
 }
 
-.btn-white::after {
+.btn--white::after {
   background-color: #fff;
 }
 
@@ -228,7 +253,7 @@ body {
     /* trick for fading something out */
 }
 
-.btn-animated {
+.btn--animated {
   animation: moveInBottom .5s ease-out .75s;
   /* .75s is animation delay */
   animation-fill-mode: backwards;
@@ -239,11 +264,11 @@ body {
   /* start point */
   0% {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(3rem);
   }
 
   80% {
-    transform: translateY(-10px);
+    transform: translateY(-1rem);
   }
 
   100% {
