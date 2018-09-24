@@ -1,26 +1,39 @@
+
+//COLORS:
+
+$color-primary: #55c57a;
+$color-primary-light: #7ed56f;
+$color-primary-dark: #28b485;
+
+$color-grey-dark: #777;
+$color-white: #fff;
 /* universal selector */
+
 *,
 *::after,
 *::before {
   margin: 0;
   padding: 0;
   /* manually add in borders and padding this way */
+
   box-sizing: inherit;
-  /* inherits from body?? */ }
+  /* inherits from body?? */
+}
 
 /* root size gets declared here */
 html {
   /* default 16px in most browsers */
   /* font-size: 10px; */
-  /* set to 10 b/c it's easy to calculate rem */
-  /* 1 rem is 10px now */
+    /* set to 10 b/c it's easy to calculate rem */
+    /* 1 rem is 10px now */
   font-size: 62.5%;
-  /* never mind, setting font-size to 10px very bad practice */
-  /* think of people that zoom in... */
-  /* default is 16px; 62.5% of 16px is 10px; */
-  /* we can still keep rem now */
-  /* rem will still be in increments of 10px */
-  /* rem not supported in internet explore below 9 */ }
+    /* never mind, setting font-size to 10px very bad practice */
+    /* think of people that zoom in... */
+    /* default is 16px; 62.5% of 16px is 10px; */
+    /* we can still keep rem now */
+    /* rem will still be in increments of 10px */
+    /* rem not supported in internet explore below 9 */
+}
 
 body {
   font-family: "Lato", sans-serif;
@@ -28,27 +41,36 @@ body {
   /* font-size: 16px; */
   line-height: 1.7;
   /* line-height double space triple space 1.5 space ms word */
-  color: #777;
+  color: $color-grey-dark;
   padding: 3rem;
+
   box-sizing: border-box;
   /* by default box-sizing width and height only considers content */
-  /* setting to border-box, width and height include padding */ }
+  /* setting to border-box, width and height include padding */
+}
 
 .header {
   height: 95vh;
   /* 95 percent of viewport height at all time */
-  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
+  background-image: linear-gradient(
+    to right bottom,
+    rgba($color-primary-light, 0.8),
+    rgba($color-primary-dark, 0.8)
+    ),
+  url(../img/hero.jpg);
+  // some serious sass magic here; rgba can actually take in a variable and add an opacity even if it came in hex form!
   background-size: cover;
   /* Scales the image as large as possible without stretching the image. If the proportions of the image differ from the element, it is cropped either vertically or horizontally so that no empty space remains. */
   background-position: top;
   /* what stays the same as the window gets resized; top;bottom;center; */
   clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
-  /* the trapezoid effect clockwise from top left */
-  /* https://bennettfeely.com/clippy/ */
+    /* the trapezoid effect clockwise from top left */
+    /* https://bennettfeely.com/clippy/ */
   position: relative;
   /* not quite sure why this is relative */
   /* since logo box is absolutely positioned relative to the header... */
-  /* https://www.w3schools.com/css/tryit.asp?filename=trycss_position_absolute */ }
+  /* https://www.w3schools.com/css/tryit.asp?filename=trycss_position_absolute */
+}
 
 .header__logo-box {
   position: absolute;
@@ -56,50 +78,59 @@ body {
   /* in this case the header class */
   /* so set its parent class to be in relative position*/
   top: 4rem;
-  left: 4rem; }
+  left: 4rem;
+
+}
 
 .header__logo {
-  height: 3.5rem; }
+  height: 3.5rem;
+}
 
 /* to center the heading */
 .header__text-box {
   position: absolute;
   /* again, absolute to the parent, and make sure parent is positioned relatively */
   top: 40%;
-  /* 40 percent of parent element */
-  /* 40% since the bottom is cropped */
+    /* 40 percent of parent element */
+    /* 40% since the bottom is cropped */
   left: 50%;
-  /* 50 percent of parent element */
+    /* 50 percent of parent element */
   transform: translate(-50%, -50%);
-  /* translates half of its width to the left, and to the right; */
-  /* moves origin of the translation point to the center of the content as opposed to the top left corner */
+    /* translates half of its width to the left, and to the right; */
+    /* moves origin of the translation point to the center of the content as opposed to the top left corner */
   text-align: center;
-  /* the button which is a link is just a span element... */
-  /* span elements are technically text, */
-  /* so to center the button, we just set the text-align to center */
-  /* epiphany: h1 is totally not a span element, so we had to do top left percentages */ }
+    /* the button which is a link is just a span element... */
+      /* span elements are technically text, */
+      /* so to center the button, we just set the text-align to center */
+      /* epiphany: h1 is totally not a span element, so we had to do top left percentages */
+}
 
 .heading-primary {
-  color: #fff;
+  color: $color-white;
   text-transform: uppercase;
+
   backface-visibility: hidden;
   /* at end of animation, it jitters up to the top ever so slightly */
   /* this is the fix for that... */
-  margin-bottom: 6rem; }
+  margin-bottom: 6rem;
+}
 
 /* block-level elements: occupy entire width, they create line breaks before and after */
 /* span is inline by default, so we have to explicitly state that they will be displayed as blocks */
 /* to break up the title and the sub heading as two lines */
+
 .heading-primary--main {
   display: block;
   font-size: 6rem;
   font-weight: 400;
   letter-spacing: 3.5rem;
+
   animation-name: moveInLeft;
   animation-duration: 1s;
   animation-timing-function: ease-out;
   /* animation-delay: 3s; */
-  /* animation-iteration-count: 3; */ }
+  /* animation-iteration-count: 3; */
+}
 
 .heading-primary--sub {
   display: block;
@@ -108,31 +139,44 @@ body {
   /* Lato loaded 100,300,400,700,900 via google fonts */
   letter-spacing: 1.75rem;
   animation: moveInRight 1s ease-out;
-  /* shorthand of the trio above */ }
+  /* shorthand of the trio above */
+}
 
 @keyframes moveInLeft {
   /* start point */
   0% {
     opacity: 0;
-    transform: translateX(-10rem); }
+    transform: translateX(-10rem);
+  }
+
   80% {
-    transform: translateX(1rem); }
+    transform: translateX(1rem);
+  }
+
   100% {
     opacity: 1;
     transform: translate(0);
-    /* it looks exactly the way it did; */ } }
+    /* it looks exactly the way it did; */
+  }
+}
 
 @keyframes moveInRight {
   /* start point */
   0% {
     opacity: 0;
-    transform: translateX(10rem); }
+    transform: translateX(10rem);
+  }
+
   80% {
-    transform: translateX(-1rem); }
+    transform: translateX(-1rem);
+  }
+
   100% {
     opacity: 1;
     transform: translate(0);
-    /* it looks exactly the way it did; */ } }
+    /* it looks exactly the way it did; */
+  }
+}
 
 /* the link pseudoclass */
 .btn:link,
@@ -142,38 +186,46 @@ body {
   padding: 1.5rem 4rem;
   display: inline-block;
   /* https://www.w3schools.com/css/css_inline-block.asp */
-  /* inline-blocks respect padding specifications as opposed to inline*/
+    /* inline-blocks respect padding specifications as opposed to inline*/
   border-radius: 10rem;
   transition: all .2s;
-  /* good for color change too */
+    /* good for color change too */
   position: relative;
-  /* for the .btn:after point of reference */
+    /* for the .btn:after point of reference */
   font-size: 1.6rem;
-  /* have to specify font size now since it inherits from root now */
-  /* unspecified it'd be 10px */ }
+    /* have to specify font size now since it inherits from root now */
+    /* unspecified it'd be 10px */
+}
 
 .btn:hover {
-  transform: translateY(-0.3rem);
+  transform: translateY(-.3rem);
   /* down is up in css */
   /* this has button kick up */
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-  /* x, y, blur, color */
-  /* a subtle black shadow */ }
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, .2);
+    /* x, y, blur, color */
+    /* a subtle black shadow */
+}
 
 .btn:active {
-  transform: translateY(-0.1rem);
+  transform: translateY(-.1rem);
   /* it goes down from hovering, but it's slightly above the default place */
   /* positioning is absolute kevin */
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-  /* lessen the shadow so it looks like you clicked it */ }
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+    /* lessen the shadow so it looks like you clicked it */
+}
 
 /* https://www.w3schools.com/css/css_inline-block.asp */
+
 /* Compared to display: inline, the major difference is that display: inline-block allows to set a width and height on the element. */
+
 /* Also, with display: inline-block, the top and bottom margins/paddings are respected, but with display: inline they are not. */
+
 /* Compared to display: block, the major difference is that display: inline-block does not add a line-break after the element, so the element can sit next to other elements. */
+
 .btn--white {
-  background-color: #fff;
-  color: #777; }
+  background-color: $color-white;
+  color: $color-grey-dark;
+}
 
 /* gets treated as the btn's child */
 /* looks exactly like the element we have, but we put it in it */
@@ -189,31 +241,41 @@ body {
   top: 0;
   left: 0;
   z-index: -1;
-  transition: all .4s; }
+  transition: all .4s;
+}
 
 .btn--white::after {
-  background-color: #fff; }
+  background-color: $color-white;
+}
 
 /* grow and fade out button */
 .btn:hover::after {
   transform: scaleX(1.4) scaleY(1.6);
   opacity: 0;
-  /* trick for fading something out */ }
+    /* trick for fading something out */
+}
 
 .btn--animated {
   animation: moveInBottom .5s ease-out .75s;
   /* .75s is animation delay */
   animation-fill-mode: backwards;
-  /* automatically apply 0% style as it starts */ }
+    /* automatically apply 0% style as it starts */
+}
 
 @keyframes moveInBottom {
   /* start point */
   0% {
     opacity: 0;
-    transform: translateY(3rem); }
+    transform: translateY(3rem);
+  }
+
   80% {
-    transform: translateY(-1rem); }
+    transform: translateY(-1rem);
+  }
+
   100% {
     opacity: 1;
     transform: translate(0);
-    /* it looks exactly the way it did; */ } }
+    /* it looks exactly the way it did; */
+  }
+}
