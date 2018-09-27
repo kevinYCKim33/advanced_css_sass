@@ -1,0 +1,9 @@
+// appends pseudo element after the element which will clear the floats
+@mixin clearfix {
+  &::after {
+    content: ""; // assign a content property otherwise it wont show up
+    display: table; // standard clearfix hack;
+    clear: both; //clears both float left and float right;
+  }
+}
+// https://www.youtube.com/watch?v=IiJzbXzOdHQ //best vid ever on floats and clearfix

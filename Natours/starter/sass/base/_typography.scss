@@ -1,0 +1,49 @@
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  /* font-size: 16px; */
+  line-height: 1.7;
+  /* line-height double space triple space 1.5 space ms word */
+  color: $color-grey-dark;
+  padding: 3rem;
+}
+
+//arguable as component;
+// really more of a typography to me (to him)
+
+.heading-primary {
+  color: $color-white;
+  text-transform: uppercase;
+
+  backface-visibility: hidden;
+  /* at end of animation, it jitters up to the top ever so slightly */
+  /* this is the fix for that... */
+  margin-bottom: 6rem;
+
+  &--main {
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    /* animation-delay: 3s; */
+    /* animation-iteration-count: 3; */
+  }
+
+  &--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    /* Lato loaded 100,300,400,700,900 via google fonts */
+    letter-spacing: 1.75rem;
+    animation: moveInRight 1s ease-out;
+    /* shorthand of the trio above */
+  }
+}
+
+/* block-level elements: occupy entire width, they create line breaks before and after */
+/* span is inline by default, so we have to explicitly state that they will be displayed as blocks */
+/* to break up the title and the sub heading as two lines */

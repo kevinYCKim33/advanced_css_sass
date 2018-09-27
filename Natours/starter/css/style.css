@@ -1,3 +1,39 @@
+@keyframes moveInLeft {
+  /* start point */
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem); }
+  80% {
+    transform: translateX(1rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+    /* it looks exactly the way it did; */ } }
+
+@keyframes moveInRight {
+  /* start point */
+  0% {
+    opacity: 0;
+    transform: translateX(10rem); }
+  80% {
+    transform: translateX(-1rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+    /* it looks exactly the way it did; */ } }
+
+@keyframes moveInBottom {
+  /* start point */
+  0% {
+    opacity: 0;
+    transform: translateY(3rem); }
+  80% {
+    transform: translateY(-1rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+    /* it looks exactly the way it did; */ } }
+
 /* universal selector */
 *,
 *::after,
@@ -23,58 +59,18 @@ html {
   /* rem not supported in internet explore below 9 */ }
 
 body {
+  box-sizing: border-box;
+  /* by default box-sizing width and height only considers content */
+  /* setting to border-box, width and height include padding */ }
+
+body {
   font-family: "Lato", sans-serif;
   font-weight: 400;
   /* font-size: 16px; */
   line-height: 1.7;
   /* line-height double space triple space 1.5 space ms word */
   color: #777;
-  padding: 3rem;
-  box-sizing: border-box;
-  /* by default box-sizing width and height only considers content */
-  /* setting to border-box, width and height include padding */ }
-
-.header {
-  height: 95vh;
-  /* 95 percent of viewport height at all time */
-  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
-  background-size: cover;
-  /* Scales the image as large as possible without stretching the image. If the proportions of the image differ from the element, it is cropped either vertically or horizontally so that no empty space remains. */
-  background-position: top;
-  /* what stays the same as the window gets resized; top;bottom;center; */
-  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
-  /* the trapezoid effect clockwise from top left */
-  /* https://bennettfeely.com/clippy/ */
-  position: relative;
-  /* not quite sure why this is relative */
-  /* since logo box is absolutely positioned relative to the header... */
-  /* https://www.w3schools.com/css/tryit.asp?filename=trycss_position_absolute */
-  /* to center the heading */ }
-  .header__logo-box {
-    position: absolute;
-    /* the position is relative to the parent element */
-    /* in this case the header class */
-    /* so set its parent class to be in relative position*/
-    top: 4rem;
-    left: 4rem; }
-  .header__logo {
-    height: 3.5rem; }
-  .header__text-box {
-    position: absolute;
-    /* again, absolute to the parent, and make sure parent is positioned relatively */
-    top: 40%;
-    /* 40 percent of parent element */
-    /* 40% since the bottom is cropped */
-    left: 50%;
-    /* 50 percent of parent element */
-    transform: translate(-50%, -50%);
-    /* translates half of its width to the left, and to the right; */
-    /* moves origin of the translation point to the center of the content as opposed to the top left corner */
-    text-align: center;
-    /* the button which is a link is just a span element... */
-    /* span elements are technically text, */
-    /* so to center the button, we just set the text-align to center */
-    /* epiphany: h1 is totally not a span element, so we had to do top left percentages */ }
+  padding: 3rem; }
 
 .heading-primary {
   color: #fff;
@@ -105,30 +101,6 @@ body {
 /* block-level elements: occupy entire width, they create line breaks before and after */
 /* span is inline by default, so we have to explicitly state that they will be displayed as blocks */
 /* to break up the title and the sub heading as two lines */
-@keyframes moveInLeft {
-  /* start point */
-  0% {
-    opacity: 0;
-    transform: translateX(-10rem); }
-  80% {
-    transform: translateX(1rem); }
-  100% {
-    opacity: 1;
-    transform: translate(0);
-    /* it looks exactly the way it did; */ } }
-
-@keyframes moveInRight {
-  /* start point */
-  0% {
-    opacity: 0;
-    transform: translateX(10rem); }
-  80% {
-    transform: translateX(-1rem); }
-  100% {
-    opacity: 1;
-    transform: translate(0);
-    /* it looks exactly the way it did; */ } }
-
 .btn {
   /* the link pseudoclass */
   /* https://www.w3schools.com/css/css_inline-block.asp */
@@ -194,14 +166,61 @@ body {
     animation-fill-mode: backwards;
     /* automatically apply 0% style as it starts */ }
 
-@keyframes moveInBottom {
-  /* start point */
-  0% {
-    opacity: 0;
-    transform: translateY(3rem); }
-  80% {
-    transform: translateY(-1rem); }
-  100% {
-    opacity: 1;
-    transform: translate(0);
-    /* it looks exactly the way it did; */ } }
+.header {
+  height: 95vh;
+  /* 95 percent of viewport height at all time */
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
+  background-size: cover;
+  /* Scales the image as large as possible without stretching the image. If the proportions of the image differ from the element, it is cropped either vertically or horizontally so that no empty space remains. */
+  background-position: top;
+  /* what stays the same as the window gets resized; top;bottom;center; */
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+  /* the trapezoid effect clockwise from top left */
+  /* https://bennettfeely.com/clippy/ */
+  position: relative;
+  /* not quite sure why this is relative */
+  /* since logo box is absolutely positioned relative to the header... */
+  /* https://www.w3schools.com/css/tryit.asp?filename=trycss_position_absolute */
+  /* to center the heading */ }
+  .header__logo-box {
+    position: absolute;
+    /* the position is relative to the parent element */
+    /* in this case the header class */
+    /* so set its parent class to be in relative position*/
+    top: 4rem;
+    left: 4rem; }
+  .header__logo {
+    height: 3.5rem; }
+  .header__text-box {
+    position: absolute;
+    /* again, absolute to the parent, and make sure parent is positioned relatively */
+    top: 40%;
+    /* 40 percent of parent element */
+    /* 40% since the bottom is cropped */
+    left: 50%;
+    /* 50 percent of parent element */
+    transform: translate(-50%, -50%);
+    /* translates half of its width to the left, and to the right; */
+    /* moves origin of the translation point to the center of the content as opposed to the top left corner */
+    text-align: center;
+    /* the button which is a link is just a span element... */
+    /* span elements are technically text, */
+    /* so to center the button, we just set the text-align to center */
+    /* epiphany: h1 is totally not a span element, so we had to do top left percentages */ }
+
+.row {
+  max-width: 114rem;
+  background-color: #eee;
+  margin: 0 auto; }
+  .row:not(:last-child) {
+    margin-bottom: 8rem; }
+  .row::after {
+    content: "";
+    display: table;
+    clear: both; }
+  .row .col-1-of-2 {
+    width: calc((100% - 6rem) / 2);
+    background-color: orangered;
+    float: left; }
+    .row .col-1-of-2:not(:last-child) {
+      margin-right: 6rem; }

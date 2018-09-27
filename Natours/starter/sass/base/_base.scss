@@ -1,0 +1,36 @@
+//resets, html, body selectors
+/* universal selector */
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  /* manually add in borders and padding this way */
+
+  box-sizing: inherit;
+  /* inherits from body?? */
+}
+
+/* root size gets declared here */
+html {
+  /* default 16px in most browsers */
+  /* font-size: 10px; */
+    /* set to 10 b/c it's easy to calculate rem */
+    /* 1 rem is 10px now */
+    // defines what 1 rem is
+  font-size: 62.5%;
+    /* never mind, setting font-size to 10px very bad practice */
+    /* think of people that zoom in... */
+    /* default is 16px; 62.5% of 16px is 10px; */
+    /* we can still keep rem now */
+    /* rem will still be in increments of 10px */
+    /* rem not supported in internet explore below 9 */
+}
+
+body {
+  box-sizing: border-box;
+  // other type sizes got moved to typography
+  /* by default box-sizing width and height only considers content */
+  /* setting to border-box, width and height include padding */
+}

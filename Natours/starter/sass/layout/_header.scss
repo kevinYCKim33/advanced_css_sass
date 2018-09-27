@@ -1,0 +1,56 @@
+// belongs in layout; there will be headers per page
+// think ahead; website will expand
+// it could be under components too
+.header {
+  height: 95vh;
+  /* 95 percent of viewport height at all time */
+  background-image: linear-gradient(
+    to right bottom,
+    rgba($color-primary-light, 0.8),
+    rgba($color-primary-dark, 0.8)
+    ),
+  url(../img/hero.jpg);
+  // some serious sass magic here; rgba can actually take in a variable and add an opacity even if it came in hex form!
+  background-size: cover;
+  /* Scales the image as large as possible without stretching the image. If the proportions of the image differ from the element, it is cropped either vertically or horizontally so that no empty space remains. */
+  background-position: top;
+  /* what stays the same as the window gets resized; top;bottom;center; */
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+    /* the trapezoid effect clockwise from top left */
+    /* https://bennettfeely.com/clippy/ */
+  position: relative;
+  /* not quite sure why this is relative */
+  /* since logo box is absolutely positioned relative to the header... */
+  /* https://www.w3schools.com/css/tryit.asp?filename=trycss_position_absolute */
+  &__logo-box { // some clutch magic;  header__logo-box same thing a:hover
+    position: absolute;
+    /* the position is relative to the parent element */
+    /* in this case the header class */
+    /* so set its parent class to be in relative position*/
+    top: 4rem;
+    left: 4rem;
+  }
+
+  &__logo {
+    height: 3.5rem;
+  }
+
+  /* to center the heading */
+  &__text-box {
+    position: absolute;
+    /* again, absolute to the parent, and make sure parent is positioned relatively */
+    top: 40%;
+      /* 40 percent of parent element */
+      /* 40% since the bottom is cropped */
+    left: 50%;
+      /* 50 percent of parent element */
+    transform: translate(-50%, -50%);
+      /* translates half of its width to the left, and to the right; */
+      /* moves origin of the translation point to the center of the content as opposed to the top left corner */
+    text-align: center;
+      /* the button which is a link is just a span element... */
+        /* span elements are technically text, */
+        /* so to center the button, we just set the text-align to center */
+        /* epiphany: h1 is totally not a span element, so we had to do top left percentages */
+  }
+}

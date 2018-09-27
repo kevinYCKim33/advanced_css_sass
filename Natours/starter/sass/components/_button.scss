@@ -1,0 +1,83 @@
+.btn {
+  /* the link pseudoclass */
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    /* https://www.w3schools.com/css/css_inline-block.asp */
+      /* inline-blocks respect padding specifications as opposed to inline*/
+    border-radius: 10rem;
+    transition: all .2s;
+      /* good for color change too */
+    position: relative;
+      /* for the .btn:after point of reference */
+    font-size: 1.6rem;
+      /* have to specify font size now since it inherits from root now */
+      /* unspecified it'd be 10px */
+  }
+
+  &:hover {
+    transform: translateY(-.3rem);
+    /* down is up in css */
+    /* this has button kick up */
+    box-shadow: 0 1rem 2rem rgba($color-black, .2);
+      /* x, y, blur, color */
+      /* a subtle black shadow */
+    /* grow and fade out button */
+    &:hover::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+        /* trick for fading something out */
+    }
+  }
+
+  &:active {
+    transform: translateY(-.1rem);
+    /* it goes down from hovering, but it's slightly above the default place */
+    /* positioning is absolute kevin */
+    box-shadow: 0 .5rem 1rem rgba($color-black, .2);
+      /* lessen the shadow so it looks like you clicked it */
+  }
+
+  /* https://www.w3schools.com/css/css_inline-block.asp */
+
+  /* Compared to display: inline, the major difference is that display: inline-block allows to set a width and height on the element. */
+
+  /* Also, with display: inline-block, the top and bottom margins/paddings are respected, but with display: inline they are not. */
+
+  /* Compared to display: block, the major difference is that display: inline-block does not add a line-break after the element, so the element can sit next to other elements. */
+
+  &--white {
+    background-color: $color-white;
+    color: $color-grey-dark;
+    &::after {
+      background-color: $color-white;
+    }
+  }
+
+  /* gets treated as the btn's child */
+  /* looks exactly like the element we have, but we put it in it */
+  &::after {
+    /* must specify content and display */
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    /* absolute positions need reference */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s;
+  }
+
+  &--animated {
+    animation: moveInBottom .5s ease-out .75s;
+    /* .75s is animation delay */
+    animation-fill-mode: backwards;
+      /* automatically apply 0% style as it starts */
+  }
+}
