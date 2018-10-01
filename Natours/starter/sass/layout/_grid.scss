@@ -4,18 +4,21 @@
   background-color: #eee;
   margin: 0 auto; // the classic way of centering;
 
-  // everything but the last child gets a margin bottom
+  // everything but the last row gets a margin bottom
   &:not(:last-child) {
     margin-bottom: $gutter-vertical; // easy peasy;
   }
 
   // https://www.youtube.com/watch?v=IiJzbXzOdHQ //best vid ever on floats and clearfix
-  @include clearfix; 
+  @include clearfix;
+  // hack to make sure the container actually contains its element
+  // floating makes things go bad; clearfix to save the day;
 
-  .col-1-of-2 {
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/calc
-    width: calc((100% - #{$gutter-horizontal}) / 2); // calc a css (not sass) fcn;
-    // if you want sass injected you add this ruby string interpolator into it
+  //27m trying some cray attribute selector
+    // ^= select all classes that START with col-
+    // *= select all elements that CONTAIN col-
+    // $= select all elements that END with col-
+  [class^="col-"] {
     background-color: orangered;
     float: left; //we always float these columns to left side;
     //gutters only to right of element except for last element
@@ -24,10 +27,34 @@
     &:not(:last-child) {
       margin-right: $gutter-horizontal; // set a margin right value
     }
+  }
 
+  .col-1-of-2 {
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/calc
+    width: calc((100% - #{$gutter-horizontal}) / 2); // calc a css (not sass) fcn;
+    // if you want sass injected you add this ruby string interpolator into it
+  }
+
+  .col-1-of-3 {
+    width: calc((100% - 2 * #{$gutter-horizontal}) / 3);
+  }
+
+  .col-2-of-3 {
+    width: calc(2 * ((100% - 2 * #{$gutter-horizontal}) / 3) + #{$gutter-horizontal});
+    // just the width of col-1-of-3 times 2 times plus the gutter width
+  }
+
+  .col-1-of-4 {
+    width: calc((100% - 3 * #{$gutter-horizontal}) / 4);
+  }
+
+  .col-2-of-4 {
+    width: calc(2* ((100% - 3 * #{$gutter-horizontal}) / 4) + #{$gutter-horizontal});
+    // two col-1-of-4 times 2 plus the gutter width
+  }
+
+  .col-3-of-4 {
+    width: calc(3* ((100% - 3 * #{$gutter-horizontal}) / 4) + 2 * #{$gutter-horizontal});
 
   }
-}
-
-// clearfix
-//.row::after
+} //end .row
