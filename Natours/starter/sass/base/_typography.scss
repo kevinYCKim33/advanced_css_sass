@@ -44,6 +44,25 @@ body {
   }
 }
 
+.heading-secondary {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+  display: inline-block; // do so so that the background-image goes as far as the heading, and not the
+  // entire width
+  // cool bread and butter combo of showing the text cropped out to the background
+    -webkit-background-clip: text; //spanking new css prop;
+    color: transparent;
+    letter-spacing: 2px; //px not rem; 2px is so small, it doesn't matter if it scales
+  transition: all .2s;
+
+  &:hover {
+    transform: skewY(2deg) skewX(15deg) scale(1.1); //unnecessary stretching effect
+    text-shadow: .5rem 1rem 2rem rgba($color-black, .2);
+  }
+}
+
 /* block-level elements: occupy entire width, they create line breaks before and after */
 /* span is inline by default, so we have to explicitly state that they will be displayed as blocks */
 /* to break up the title and the sub heading as two lines */

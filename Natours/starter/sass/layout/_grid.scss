@@ -1,7 +1,7 @@
 .row {
   max-width: $grid-width; // recommended width by experts?
   //max-width: if viewport width is bigger than 114 rem; the row won't get bigger than it;
-  background-color: #eee;
+  // background-color: #eee;
   margin: 0 auto; // the classic way of centering;
 
   // everything but the last row gets a margin bottom
@@ -19,7 +19,7 @@
     // *= select all elements that CONTAIN col-
     // $= select all elements that END with col-
   [class^="col-"] {
-    background-color: orangered;
+    // background-color: orangered;
     float: left; //we always float these columns to left side;
     //gutters only to right of element except for last element
 
