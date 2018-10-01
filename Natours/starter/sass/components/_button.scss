@@ -13,7 +13,7 @@
       /* good for color change too */
     position: relative;
       /* for the .btn:after point of reference */
-    font-size: 1.6rem;
+    font-size: $default-font-size;
       /* have to specify font size now since it inherits from root now */
       /* unspecified it'd be 10px */
   }
@@ -79,5 +79,31 @@
     /* .75s is animation delay */
     animation-fill-mode: backwards;
       /* automatically apply 0% style as it starts */
+  }
+}
+
+.btn-next {
+  &:link,
+  &:visited {
+    font-size: $default-font-size;
+    color: $color-primary;
+    display: inline; // so we can use box model prop;
+    text-decoration: none; //get rid of underline prop;
+    border-bottom: 1px solid $color-primary;
+    padding: 3px; // small enough to not change via rem;
+    transition: all .2s;
+  }
+
+  &:hover {
+    background-color: $color-primary;
+    color: $color-white;
+    box-shadow: 0 1rem 2rem rgba($color-black, .15);
+    transform: translateY(-2px); //move up on hover
+  }
+
+  // lessen shadow to make it look like the button is pressed;
+  &:active {
+    box-shadow: 0 .5rem 1rem rgba($color-black, .15);
+    transform: translateY(0);
   }
 }

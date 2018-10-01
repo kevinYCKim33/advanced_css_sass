@@ -1,0 +1,41 @@
+.composition {
+    position: relative; //relative for its photo babies
+    &__photo {
+      width: 55%; //width of IMAGES should ALWAYS be in percentages for responsiveness in mind
+      box-shadow: 0 1.5rem 4rem rgba($color-black, .4);
+      border-radius: 2px;
+      position: absolute; //relative to first parent that says relative;
+      z-index: 10;
+      transition: all .2s;
+      outline-offset: 2rem; // what differentiates outlines from border
+      &--p1 {
+        left: 0;
+        top: -2rem; // put it above the lining of youre gonna fall in love with nature
+      }
+
+      &--p2 {
+        right: 0;
+        top: 2rem; // put it above the lining of youre gonna fall in love with nature
+      }
+
+      &--p3 {
+        left: 20%;
+        top: 10rem;
+      }
+
+      &:hover {
+        outline: 1.5rem solid $color-primary; //similar to border setting
+        transform: scale(1.05);
+        box-shadow: 0 2.5rem 4rem rgba($color-black, .5); //bigger shadows and darker
+        z-index: 20;
+      }
+
+
+    }
+
+
+}
+
+// composition__photo {
+//
+// }
