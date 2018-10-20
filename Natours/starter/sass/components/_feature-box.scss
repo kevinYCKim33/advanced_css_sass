@@ -1,0 +1,25 @@
+.feature-box {
+    background-color: rgba($color-white, .8);
+    font-size: 1.5rem; //
+    padding: 2.5rem;
+    text-align: center;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+    transition: transform .3s; // just one transition
+
+    &__icon {
+      font-size: 6rem; //60px; technically a font
+      margin-bottom: .5rem; //5px;
+      background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+      display: inline-block; // do so so that the background-image goes as far as the heading, and not the
+      // entire width
+      // cool bread and butter combo of showing the text cropped out to the background
+        -webkit-background-clip: text; //spanking new css prop;
+        color: transparent;
+    }
+
+    &:hover {
+      transform: translateY(-1.5rem) scale(1.03); //kick up 15px;
+    }
+
+}

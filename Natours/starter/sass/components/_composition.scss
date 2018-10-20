@@ -31,11 +31,13 @@
       }
 
 
+
     }
 
-
+    // making images shrink that are not hovered when another is hoverd;
+    // also push up the images not hovered just a bit;
+    &:hover &__photo:not(:hover) {
+      transform: scale(.95) translateY(-.5rem);
+    }
+    //composition:hover composition__photo:not(:hover)
 }
-
-// composition__photo {
-//
-// }

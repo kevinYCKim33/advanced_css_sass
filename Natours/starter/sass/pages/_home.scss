@@ -3,3 +3,23 @@
   padding: 25rem 0;
   margin-top: -25vh; //20 in udemy so the top of it goes above to fill out the cropped out part
 }
+
+
+.section-features {
+  padding: 20rem 0; //trendy wide paddings
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)),
+  url(../img/nat-4.jpg);
+  background-size: cover; //nicely covers the entire section
+
+  // do the skewed background skew entire section
+  transform: skewY(-7deg); //skew ERRthing 7 deg
+  margin-top: -10rem; // just magic to make the top trapezoidally clean
+  // then skew the boxes inside it 7 deg other way
+  // & > * === anything that is a direct child of only (so NOT & *) <== that's all children
+  & > * {
+    transform: skewY(7deg);
+  }
+}
