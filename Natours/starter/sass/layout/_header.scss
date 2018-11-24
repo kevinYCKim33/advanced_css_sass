@@ -15,6 +15,7 @@
   /* Scales the image as large as possible without stretching the image. If the proportions of the image differ from the element, it is cropped either vertically or horizontally so that no empty space remains. */
   background-position: top;
   /* what stays the same as the window gets resized; top;bottom;center; */
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%); //firefox proof
   clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
     /* the trapezoid effect clockwise from top left */
     /* https://bennettfeely.com/clippy/ */
