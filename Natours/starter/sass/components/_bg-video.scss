@@ -1,0 +1,20 @@
+// pretty simple stuff for background video...
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%; //of parent
+  width: 100%;
+  z-index: -1;
+  opacity: .15;
+  overflow: hidden;
+  // video itself
+  &__content {
+    height: 100%;
+    width: 100%;
+    //new prop
+    object-fit: cover; //video will fill entire parent while maintaing aspect ratio;
+    // works with html elements/// similar to background image trick
+    // cover//fill//
+  }
+}

@@ -57,6 +57,14 @@
     }
   }
 
+  &--green {
+    background-color: $color-primary;
+    color: $color-white;
+    &::after {
+      background-color: $color-primary;
+    }
+  }
+
   /* gets treated as the btn's child */
   /* looks exactly like the element we have, but we put it in it */
   &::after {
@@ -82,7 +90,7 @@
   }
 }
 
-.btn-next {
+.btn-text {
   &:link,
   &:visited {
     font-size: $default-font-size;
