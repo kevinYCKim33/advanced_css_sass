@@ -1,5 +1,6 @@
 .btn {
   /* the link pseudoclass */
+  &,
   &:link,
   &:visited {
     text-transform: uppercase;
@@ -16,6 +17,10 @@
     font-size: $default-font-size;
       /* have to specify font size now since it inherits from root now */
       /* unspecified it'd be 10px */
+
+    //Change for the <button> element
+    border: none;
+    cursor: pointer;
   }
 
   &:hover {
@@ -33,7 +38,9 @@
     }
   }
 
-  &:active {
+  &:active,
+  &:focus {
+    outline: none; // hide button highlightness
     transform: translateY(-.1rem);
     /* it goes down from hovering, but it's slightly above the default place */
     /* positioning is absolute kevin */

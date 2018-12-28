@@ -1,0 +1,89 @@
+.navigation {
+  &__checkbox {
+    display: none; //hide checkbox from checkbox hack
+  }
+
+  &__button {
+    background-color: $color-white;
+    height: 7rem; // cover up beginning background just a bit larger
+    width: 7rem;
+    position: fixed;
+    top: 6rem; // just some geometry to align two circles
+    right: 6rem;
+    border-radius: 50%;
+    z-index: 2000; //even higher
+  }
+
+  // circle expanding to giant background
+  // put a circle behind menu button
+  &__background {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    position: fixed; //doesn't change position as we scroll page
+    top: 6.5rem;
+    right: 6.5rem; // nicely in corner then
+    background-image: radial-gradient($color-primary-light, $color-primary-dark);
+    z-index: 1000; // only works on things with positions defined...
+
+    transform: scale(80); // for dev purpose later on...
+  }
+
+  // huge vh to cover up entire menu
+  &__nav {
+    height: 100vh; //entire height of the viewport
+    width: 100%; // no need to specify since block level elem... 100% width by default
+    position: fixed; // so scroll down and have nav stay in same placeholder
+    top: 0;
+    right: 0;
+    z-index: 1500; //between button and background
+  }
+
+  // center this inside nav container
+  &__list {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); // good candidate for mixin...
+    list-style: none;
+    text-align: center;
+  }
+
+  &__item {
+    margin: 1rem;
+  }
+
+  &__link {
+    &:link,
+    &:visited {
+      display: inline-block; //so padding gets applied;
+      font-size: 3rem;
+      font-weight: 300;
+      padding: 1rem 2rem;
+      color: $color-white;
+      text-decoration: none;
+      text-transform: uppercase;
+      // magic line of code to get that cool slash stuff...
+      background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white, $color-white 50%);
+      background-size: 220%; // double space to setup slick animation
+      transition: all .4s;
+
+      // for numbers
+      span {
+        margin-right: 1.5rem;
+        display: inline-block;
+      }
+
+    }
+
+    &:hover,
+    &:active {
+      // magic line for that slick shifting on hover animation
+      background-position: 100%; // shift the position on hover...
+      color: $color-primary;
+      // subtle move of the menu just a wee bit left
+      transform: translateX(1rem);
+    }
+
+  }
+}
