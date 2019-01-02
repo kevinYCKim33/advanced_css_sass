@@ -12,6 +12,7 @@
     right: 6rem;
     border-radius: 50%;
     z-index: 2000; //even higher
+    box-shadow: 0 1rem 3rem rgba($color-black, .1); //subtle shadow
   }
 
   // circle expanding to giant background
@@ -25,18 +26,27 @@
     right: 6.5rem; // nicely in corner then
     background-image: radial-gradient($color-primary-light, $color-primary-dark);
     z-index: 1000; // only works on things with positions defined...
-
-    transform: scale(80); // for dev purpose later on...
+    // https://easings.net
+    // https://easings.net/#easeInOutQuint  make it fast at first to hide ugly margin transition demo
+    // then slow for pretty action on circle shrinking/increasing
+    transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
+    // transform: scale(80); // for dev purpose later on...
   }
 
   // huge vh to cover up entire menu
   &__nav {
     height: 100vh; //entire height of the viewport
-    width: 100%; // no need to specify since block level elem... 100% width by default
+    // width: 100%; // no need to specify since block level elem... 100% width by default
     position: fixed; // so scroll down and have nav stay in same placeholder
     top: 0;
-    right: 0;
+    left: 0;
     z-index: 1500; //between button and background
+
+    opacity: 0; // by itself not good enough...links are still clickable
+    width: 0; //hense we set the width to 0
+    transition: all .8s cubic-bezier(0.68, -0.55, 0.265, 1.55); // wahhh?? you can do that??
+    // https://easings.net easeInOutBack effect for that slide and click effect
+
   }
 
   // center this inside nav container
@@ -47,6 +57,7 @@
     transform: translate(-50%, -50%); // good candidate for mixin...
     list-style: none;
     text-align: center;
+    width: 100%; // to fix weird transition glitch
   }
 
   &__item {
@@ -85,5 +96,25 @@
       transform: translateX(1rem);
     }
 
+  }
+
+  // html
+  // <input checkbox id="navi-toggle" class="navigation__checkbox">
+  // <label for="navi-toggle" class="navigation__button">
+  // <div class="navigation__background">
+
+  // when we click the navigation__button, we will through label magic, check navi-toggle
+  // then we get navigation__checkbox's checked state's sibling navigation__background and then style it
+
+  // + adjacent sibling...
+  // ~ just a sibling
+
+  &__checkbox:checked ~ &__background {
+    transform: scale(80);
+  }
+
+  &__checkbox:checked ~ &__nav {
+    opacity: 1;
+    width: 100%;
   }
 }
