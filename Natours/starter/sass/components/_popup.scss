@@ -1,0 +1,110 @@
+.popup {
+  // display: none; //apparently not great practice for anim
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s;
+  // dayum!! activate when targeted via a href="#popup"
+  &:target {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  // dayum!!! close has an anchor tag to something random...meaning
+  // .popup:target is no longer valid and reverts back to opacity: 0!!
+
+  // get the background blackness going
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba($color-black, .8);
+  z-index: 9999;
+
+  // the content of the actual popup; what is actually popping up
+  &__content {
+    @include absCenter; //you can absolute off a fixed?? not just relative??
+    width: 75%; //75% of viewport
+    // height: 50rem; // hmm perhaps a vh would have served better?? looks (only) good in desktop
+    background-color: $color-white;
+    box-shadow: 0 2rem 4rem rgba($color-black, .2);
+    border-radius: 3px;
+    // fake table hack
+    display: table; //left and right are cells; and both will have same height
+    overflow: hidden; //way to make image crop to the border radius
+    opacity: 0;
+    visibility: hidden;
+    // make it a very small dot initially
+    // can only animate a opacity 0 elem...display: none won't work
+    // have to rewrite translate from mixin class since css transform will override
+    transform: translate(-50%, -50%) scale(.25);
+    transition: all .4s .2s; // black background first then popup box
+  }
+
+  &__left {
+    width: 33.333333%;
+    display: table-cell;
+    // float: left; //haven't seen this in awhile;
+  }
+
+  &__right {
+    width: 66.66667%;
+    display: table-cell;
+      vertical-align: middle;
+    padding: 3rem 5rem;
+    // float: left;
+  }
+
+  &__img {
+    display: block;
+    width: 100%; //fill up the image column
+  }
+
+  &__text {
+    font-size: 1.4rem;
+    margin-bottom: 4rem;
+
+    -moz-column-count: 2;
+    -moz-column-gap: 4rem;
+    -moz-column-rule: 1px solid $color-grey-light-2;
+
+    // auto prefixer library lecture!! coming soon!!
+
+    // new-ish css3 props
+    column-count: 2;
+    column-gap: 4rem; //1em = 14px; current size of current elem 1 em default
+    column-rule: 1px solid $color-grey-dark-2;
+
+    // needs html lang=en to work
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto; //manual also an option look into it
+  }
+
+  // when the popup becomes the target, style its child element __content
+  &:target &__content {
+    // make it show up in animation
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%); // animates from initial &__content state
+  }
+  &__close {
+    &:link,
+    &:visited {
+      color: $color-grey-dark;
+      position: absolute;
+      top: 2.5rem;
+      right: 2.5rem;
+      font-size: 3rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: all .2s;
+      line-height: 1;
+    }
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}

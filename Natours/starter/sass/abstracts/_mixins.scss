@@ -7,3 +7,10 @@
   }
 }
 // https://www.youtube.com/watch?v=IiJzbXzOdHQ //best vid ever on floats and clearfix
+
+@mixin absCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
