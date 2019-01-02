@@ -13,6 +13,8 @@
     border-radius: 50%;
     z-index: 2000; //even higher
     box-shadow: 0 1rem 3rem rgba($color-black, .1); //subtle shadow
+    text-align: center; // center the three lines
+    cursor: pointer;
   }
 
   // circle expanding to giant background
@@ -96,6 +98,60 @@
       transform: translateX(1rem);
     }
 
+  }
+
+  // ICON
+  &__icon {
+    position: relative;
+    margin-top: 3.5rem; // move down the three horz lines into center of circle
+    // three lines
+    &,
+    &::before,
+    &::after {
+      width: 3rem;
+      height: 2px; //always 2 regardless of base
+      background-color: $color-grey-dark-3;
+      display: inline-block;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      transition: all .2s;
+    }
+
+    &::before { top: -.8rem; }
+    &::after { top: .8rem; }
+  }
+
+  // eyebrow raising effect
+  &__button:hover &__icon::before {
+    top: -1rem;
+  }
+
+  &__button:hover &__icon::after {
+    top: 1rem;
+  }
+
+  // when checkbox is checked, select its brother's child icon
+  // hide the middle one
+
+  // rotate bot and top to make a cross
+  &__checkbox:checked + &__button &__icon {
+    background-color: transparent; // make it invisible
+  }
+
+  &__checkbox:checked + &__button &__icon::before {
+    top: 0;
+    // cooler than 45 deg;
+    transform: rotate(135deg);
+  }
+
+  &__checkbox:checked + &__button &__icon::after {
+    top: 0;
+    transform: rotate(-135deg);
   }
 
   // html
