@@ -7,6 +7,16 @@
   // everything but the last row gets a margin bottom
   &:not(:last-child) {
     margin-bottom: $gutter-vertical; // easy peasy;
+
+    @include respond(tab-port) {
+      margin-bottom: $gutter-vertical-small;
+    }
+  }
+
+  // smaller width for mobile
+  @include respond(tab-port) {
+    max-width: 50rem;
+    padding: 0 3rem; // padding on side
   }
 
   // https://www.youtube.com/watch?v=IiJzbXzOdHQ //best vid ever on floats and clearfix
@@ -26,6 +36,19 @@
     // as long as this class is not the last child of the parent...
     &:not(:last-child) {
       margin-right: $gutter-horizontal; // set a margin right value
+
+      @include respond(tab-port) {
+        margin-right: $gutter-vertical-small; //no gutters since columns take all row
+        margin-bottom: $gutter-vertical-small;
+      }
+    }
+
+    // in tablets...all columns have 100% width...
+    // common practice
+    @include respond(tab-port) {
+      width: 100% !important;
+      // any col-1-of-2 col-1-of-3 it doesn't matter...it's gonna get overridden by this
+      // an actual case where !important seems really valid
     }
   }
 

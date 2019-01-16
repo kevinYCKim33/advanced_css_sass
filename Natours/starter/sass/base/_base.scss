@@ -19,13 +19,52 @@ html {
     /* set to 10 b/c it's easy to calculate rem */
     /* 1 rem is 10px now */
     // defines what 1 rem is
-  font-size: 62.5%;
+  font-size: 62.5%; // 1 rem = 10px; 10px/16px = 62.5%
     /* never mind, setting font-size to 10px very bad practice */
     /* think of people that zoom in... */
     /* default is 16px; 62.5% of 16px is 10px; */
     /* we can still keep rem now */
     /* rem will still be in increments of 10px */
     /* rem not supported in internet explore below 9 */
+
+  // on the phone...its 50%...
+  // @include respond-phone {
+  //   font-size: 50%;
+  // }
+
+  // unnecessary, tab-port takes care of this
+  // @include respond(phone) {
+  //   font-size: 50%; //1 rem = 8px
+  // }
+
+  // DESKTOP: ALWAYS DO LARGER QUERY BEFORE SMALLER QUERY
+  // ORDER MATTERS!!
+  // IF WE HAD 700PX, BOTH TAB LAND/PORT WILL APPLY...
+    // 700 < 900; 700 < 1200;
+
+  // MOBILE: ALWAYS DO SMALLER QUERY FIRST BEFORE LARGER QUERY
+
+  @include respond(tab-land) { //width < 1200?
+    font-size: 56.25%; // 1rem = 9px; 16 * 0.5625 = 9px
+  }
+
+  @include respond(tab-port) { //width < 900?
+    font-size: 50%; //1 rem = 8px
+  }
+
+  @include respond(big-desktop) {
+    font-size: 75%; // 1rem = 12px
+  }
+
+  // ^^^ same as
+  // @media (max-width: 600px) {
+  //   font-size: 50%;
+  // }
+
+  // in _mixins.scss
+  // @mixin respond-phone {
+  //   @media (max-width: 600px) { @content }
+  // }
 }
 
 body {
@@ -33,4 +72,23 @@ body {
   // other type sizes got moved to typography
   /* by default box-sizing width and height only considers content */
   /* setting to border-box, width and height include padding */
+  padding: 3rem;
+
+  @include respond(tab-port) { //width < 900?
+    padding: 0; //remove padding on mobile view
+  }
+
 }
+
+// noob way...
+// @media (max-width: 600px) {
+//   html {
+//
+//   }
+//
+//   body {
+//
+//   }
+//
+//
+// }

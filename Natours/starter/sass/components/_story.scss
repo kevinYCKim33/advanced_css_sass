@@ -9,6 +9,20 @@
   font-size: $default-font-size;
   transform: skewX(-12deg); // the trapezoid trick again
 
+  @include respond(tab-port) {
+    width: 100%;
+    padding: 4rem;
+    padding-left: 7rem;
+  }
+
+  // get rid of trapezoid completely
+  @include respond(phone) {
+    transform: skewX(0);
+  }
+
+  // @media (max-width: 600px) {
+  //   width: 50%;
+  // }
   // direct child of story should be skewed in other direction; push-pull
   // almost works but since __shape uses translateX it doesn't work...
   // hence the not too DRY code of skewX(12deg) appearing twice in shape and text
@@ -17,18 +31,26 @@
   // }
 
   &__shape {
-    width: 15rem;
-    height: 15rem;
     float: left; //make things around it float around it
     // radius: 7.5 rem... // exactly center center... weird stuff.
-    -webkit-shape-outside: circle(50% at 50% 50%); //safari fix; won't work on Firefox/Chrome...??
-    shape-outside: circle(50% at 50% 50%); // and element must be floated...//and have height...
-
-    clip-path: circle(50% at 50% 50%);
-    -webkit-clip-path: circle(50% at 50% 50%);
-
     transform: translateX(-3rem) skewX(12deg); // best way of dealing with float; over margins...
     position: relative;
+    overflow: hidden; // added during cross browser
+    border-radius: 50%; // cross browser addition
+
+    @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+      -webkit-clip-path: circle(50% at 50% 50%);
+      clip-path: circle(50% at 50% 50%);
+      -webkit-shape-outside: circle(50% at 50% 50%); //safari fix; won't work on Firefox/Chrome...??
+      shape-outside: circle(50% at 50% 50%); // and element must be floated...//and have height...
+      width: 15rem;
+      height: 15rem;
+      border-radius: none;
+    }
+
+    @include respond(phone) {
+      transform: translateX(-3rem) skewX(0);
+    }
   }
 
 
@@ -46,6 +68,9 @@
   &__text {
     // color: blue;
     transform: skewX(12deg);
+    @include respond(phone) {
+      transform: skewX(0);
+    }
   }
 
   &__caption {

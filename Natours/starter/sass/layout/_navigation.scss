@@ -15,6 +15,17 @@
     box-shadow: 0 1rem 3rem rgba($color-black, .1); //subtle shadow
     text-align: center; // center the three lines
     cursor: pointer;
+
+    // make button stay in top right corner
+    @include respond(tab-port) {
+      top: 4rem;
+      right: 4rem;
+    }
+
+    @include respond(phone) {
+      top: 3rem;
+      right: 3rem;
+    }
   }
 
   // circle expanding to giant background
@@ -32,7 +43,16 @@
     // https://easings.net/#easeInOutQuint  make it fast at first to hide ugly margin transition demo
     // then slow for pretty action on circle shrinking/increasing
     transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
-    // transform: scale(80); // for dev purpose later on...
+
+    @include respond(tab-port) {
+      top: 4.5rem;
+      right: 4.5rem;
+    }
+
+    @include respond(phone) {
+      top: 3.5rem;
+      right: 3.5rem;
+    }
   }
 
   // huge vh to cover up entire menu

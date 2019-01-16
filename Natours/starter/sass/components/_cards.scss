@@ -14,6 +14,7 @@
     top: 0;
     left: 0;
     width: 100%;
+    -webkit-backface-visibility: hidden; //found out via caniuse.com
     backface-visibility: hidden; // don't want back seen
     border-radius: 3px;
     overflow: hidden; // hidden so corners overflowing are hidden... clip path overrides it... weirdly...
@@ -146,5 +147,50 @@
   &__price-value {
     font-size: 6rem; // huge text;
     font-weight: 100; //make huge texts thin
+  }
+
+  // change cards to eliminate hover effect
+  @include respond(tab-port) {
+    height: auto; //browser default
+    border-radius: 3px; // want it not just on front
+    background-color: $color-white;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+
+    &__side {
+      height: auto; // browser default
+      position: relative;
+      box-shadow: none;
+
+      &--back {
+        transform: rotateY(0); // don't want rotation
+        clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%)
+      }
+    }
+
+    &:hover &__side--front {
+      transform: rotateY(0); // don't want rotation
+    }
+
+    &__details {
+      padding: 1rem 3rem;
+    }
+
+    // FRONT SIDE STYLING
+    &__cta {
+      position: relative;
+      top: 0;
+      left: 0;
+      transform: translate(0);
+      width: 100%; //to fix the button misalign issue
+      padding: 7rem 4rem 4rem 4rem;
+    }
+
+    &__price-box {
+      margin-bottom: 3rem;
+    }
+
+    &__price-value {
+      font-size: 4rem; // huge text;
+    }
   }
 }

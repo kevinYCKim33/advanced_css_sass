@@ -7,6 +7,10 @@
     box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
     transition: transform .3s; // just one transition
 
+    @include respond(tab-port) {
+      padding: 2rem;
+    }
+
     &__icon {
       font-size: 6rem; //60px; technically a font
       margin-bottom: .5rem; //5px;
@@ -16,6 +20,11 @@
       // cool bread and butter combo of showing the text cropped out to the background
         -webkit-background-clip: text; //spanking new css prop;
         color: transparent;
+
+      @include respond(tab-port) {
+        margin-bottom: 0;
+      }
+
     }
 
     &:hover {

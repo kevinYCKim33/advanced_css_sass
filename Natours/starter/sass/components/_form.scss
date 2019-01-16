@@ -15,6 +15,10 @@
     width: 90%;
     display: block;
     transition: all .3s;
+
+    @include respond(tab-port) {
+      width: 100%;
+    }
     // important for keyboard lovers
     &:focus {
       outline: none; // don't just call it a day after doing this
@@ -58,6 +62,11 @@
   &__radio-group {
     width: 49%; // so it fits in one line two choices
     display: inline-block; //side by side
+
+    @include respond(tab-port) {
+      width: 100%; // take up a whole line
+      margin-bottom: 1rem;
+    }
   }
 
   &__radio-label {

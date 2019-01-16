@@ -2,27 +2,62 @@
 // think ahead; website will expand
 // it could be under components too
 .header {
-  height: 95vh;
-  /* 95 percent of viewport height at all time */
+  height: 85vh; //for old firefox version
   background-image: linear-gradient(
     to right bottom,
     rgba($color-primary-light, 0.8),
     rgba($color-primary-dark, 0.8)
     ),
-  url(../img/hero.jpg);
+  url(../img/hero-small.jpg);
   // some serious sass magic here; rgba can actually take in a variable and add an opacity even if it came in hex form!
   background-size: cover;
   /* Scales the image as large as possible without stretching the image. If the proportions of the image differ from the element, it is cropped either vertically or horizontally so that no empty space remains. */
   background-position: top;
   /* what stays the same as the window gets resized; top;bottom;center; */
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%); //firefox proof
-  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
-    /* the trapezoid effect clockwise from top left */
-    /* https://bennettfeely.com/clippy/ */
+
   position: relative;
   /* not quite sure why this is relative */
   /* since logo box is absolutely positioned relative to the header... */
   /* https://www.w3schools.com/css/tryit.asp?filename=trycss_position_absolute */
+
+  @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+    height: 95vh;
+    /* 95 percent of viewport height at all time */
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); //firefox proof
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+      /* the trapezoid effect clockwise from top left */
+      /* https://bennettfeely.com/clippy/ */
+  }
+
+  //dots per inch, 192 for apple retina screens
+  // whenever rez is higher than this, the code inside will apply
+  // if you have a kickass screen, and you have a large screen load the proper hero image
+  // won't load on high rez iphone
+
+  // the comma serves as an or in css
+  // 600px ~ 37.5em
+  // 2000px 125em
+  // media queries are in ems always
+
+  // safari doesn't support....think of iPhone users!!
+  // gotta add webkit!
+  @media (min-resolution: 192dpi) and (min-width: 37.5em),
+         (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+         (min-width: 125em) {
+    background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+      ),
+    url(../img/hero.jpg);
+  }
+
+
+  @include respond(phone) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%); //firefox proof
+    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  }
+
   &__logo-box { // some clutch magic;  header__logo-box same thing a:hover
     position: absolute;
     /* the position is relative to the parent element */
