@@ -150,7 +150,12 @@
   }
 
   // change cards to eliminate hover effect
-  @include respond(tab-port) {
+  // hover: hover opposite
+
+  // hover: none for iPads!!
+  //@include respond(tab-port) {
+  @media only screen and (max-width: 56.25em),
+         only screen and (hover: none) {
     height: auto; //browser default
     border-radius: 3px; // want it not just on front
     background-color: $color-white;
