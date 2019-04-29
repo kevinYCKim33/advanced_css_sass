@@ -1,0 +1,624 @@
+/////////
+//LOGO///
+/////////
+
+.logo {
+  height: 3.25rem;
+  margin-left: 2rem;
+}
+
+/////////
+//Search///
+/////////
+
+// search a form containing input and button
+.search {
+  // as an item of a flex container, i want it to take 40% of the parent width all the time
+  flex: 0 0 40%; // don't want it to GROW SHRINK but take up 40% of parent width
+
+  display: flex; //flex item is a flex container too
+  // flex up the input and the magnifying glass
+  align-items: center; // vertical center
+  justify-content: center; // horz center;
+
+  @media only screen and (max-width: $bp-smallest) {
+    order: 1; // 0: in proper place; 1: one to the right; -1: one to the left
+    flex: 0 0 100%; // take up the entire width of container
+    // clever trick of swapping order and having it take its entire row
+    background-color: var(--color-grey-light-2);
+
+  }
+
+  &__input {
+    font-family: inherit; //doesn't inherit by default;
+    font-size: inherit;
+    color: inherit;
+    background-color: var(--color-grey-light-2);
+    border: none;
+    padding: .7rem 2rem;
+    border-radius: 100px;
+    width: 90%;
+    transition: all .2s;
+    margin-right: -3.25rem; // this slyly puts the button on top of the search bar
+
+    &:focus {
+      outline: none;
+      width: 100%; // which is 40%;
+    }
+
+    // chrome and safari browsers
+    &::-webkit-input-placeholder {
+      font-weight: 100;
+      color: var(--color-grey-light-4);
+    }
+  }
+
+  // when the input is focused its sibling button should be...
+  &__input:focus + &__button {
+    background-color: var(--color-grey-light-3);
+  }
+  &__button {
+    border: none;
+    background-color: var(--color-grey-light-2);
+
+    &:focus {
+      outline: none;
+    }
+
+    &:active {
+      transform: translateY(2px); // slide magnifying with expanding input
+    }
+  }
+  // the svg wrapped in the button tag
+  &__icon {
+    height: 2rem;
+    width: 2rem;
+    fill: var(--color-grey-dark-3);
+  }
+}
+
+/////////
+//User navigation///
+/////////
+.user-nav {
+  align-self: stretch; // as a flex-item of the .container, stretch vertically to fill out the height of the container
+  display: flex;
+  align-items: center;
+
+  // user-nav's direct children
+    // aka its three flex items (icon-box, icon-box, user)
+  & > * {
+    padding: 0 2rem;
+    cursor: pointer;
+    height: 100%;
+    // align-self: center;
+    display: flex; //nest on nest on nest
+    align-items: center;
+  }
+
+  & > *:hover {
+    background-color: var(--color-grey-light-2);
+  }
+
+  &__icon-box {
+    position: relative;
+  }
+
+  // formatting an svg icon
+  &__icon {
+    fill: var(--color-grey-dark-2);
+    height: 2.25rem;
+    width: 2.25rem;
+  }
+
+  &__notification {
+    font-size: .8rem;
+    height: 1.75rem;
+    width: 1.75rem;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: #fff;
+    position: absolute; //flexbox not appropriate here
+    top: 1.5rem;
+    right: 1.1rem;
+
+    // centering its lone child number
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__user-photo {
+    height: 3.75rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+  }
+
+}
+
+
+////
+/// SIDE NAV
+///
+
+.side-nav {
+  font-size: 1.4rem;
+  list-style: none;
+  margin-top: 3.5rem;
+
+  @media only screen and (max-width: $bp-medium) {
+    display: flex;
+    margin: 0;
+  }
+
+
+  // the link with the whole a and span wrapped inside
+  &__item {
+    position: relative; // for its ::before selector
+
+    &:not(:last-child) {
+      margin-bottom: .5rem;
+      @media only screen and (max-width: $bp-medium) {
+        margin-bottom: 0;
+      }
+    }
+
+    @media only screen and (max-width: $bp-medium) {
+      flex: 1; // give all 4 flex items ability to grow
+    }
+  }
+
+  // for the cool hover effect
+  // puts nice pink bar on the left waiting to burst
+  &__item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3px; // will expand to 100%
+    background-color: var(--color-primary);
+    transform: scaleY(0); // will exapdn to 1
+    // transform-origin: bottom; // center; //top
+    transition: transform .2s,
+                width .4s cubic-bezier(1, 0, 0, 1) .2s,
+                background-color .1s; // kick in transform and width
+    // have width anim kick in .2s after the transform takes place
+    //
+  }
+
+  &__item:hover::before,
+  &__item--active::before {
+    transform: scaleY(1);
+    width: 100%;
+  }
+
+  &__item:active::before {
+    background-color: var(--color-primary-light);
+  }
+
+  &__link:link,
+  &__link:visited {
+    color: var(--color-grey-light-1);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    padding: 1.5rem 3rem;
+    position: relative;
+    z-index: 10; // only works with specific position
+    display: flex; // flex up svg and text
+    align-items: center;
+    // justify-content: center;
+
+    @media only screen and (max-width: $bp-medium) {
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      flex-direction: column;
+      padding: 1.5rem .5rem;
+    }
+  }
+
+  // &__link:hover {
+  //   color: orangered;
+  // }
+
+  // icon is a direct child of a, a has a color of color-grey-light-1
+  &__icon {
+    // color: blue;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-right: 2rem;
+    fill: currentColor; //woahhhhh takes in currentColor of the parent element
+    // currentColor also takes in its parent's color hover effect
+    @media only screen and (max-width: $bp-medium) {
+      margin-right: 0;
+      margin-bottom: .7rem;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+  }
+}
+
+////
+/// LEGAL TEXT
+///
+
+.legal {
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 2.5rem;
+  color: var(--color-grey-light-4);
+
+  @media only screen and (max-width: $bp-medium) {
+    display: none;
+  }
+}
+
+//
+// GALLERY
+//
+
+.gallery {
+  display: flex;
+  &__photo {
+    width: 100%;
+    display: block; //avoid small space below
+  }
+}
+
+///
+/// hotel overview
+
+.overview {
+  display: flex;
+  align-items: center;
+  border-bottom: var(--line);
+  &__heading {
+    font-size: 2.25rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 1.5rem 3rem;
+    @media only screen and (max-width: $bp-small) {
+      font-size: 1.8rem;
+      padding: 1.25rem 2rem;
+    }
+
+  }
+  &__stars {
+    // flex: 1;
+    display: flex; // aligns the star without awkward bottom spacing
+    margin-right: auto; // lowkey powerful way to create separation
+    // flex-item-2 flex-item-2         flex-item-3 flex-item-4
+    // no need to nest flexboxes
+    // just set margin-right: auto on flex-item-2
+  }
+  &__icon-star,
+  &__icon-location {
+    width: 1.75rem;
+    height: 1.75rem;
+    fill: var(--color-primary);
+  }
+
+  // contains icon and location text
+  &__location {
+    // display: flex;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon-location {
+    margin-right: .5rem;
+  }
+
+  &__rating {
+    background-color: var(--color-primary);
+    color: #fff;
+    margin-left: 3rem;
+    padding: 0 2.25rem;
+    align-self: stretch; // key learning
+
+    // solid froggy principle
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @media only screen and (max-width: $bp-small) {
+      padding: 0 1.5rem;
+    }
+  }
+
+  &__rating-average {
+    font-size: 2.25rem;
+    font-weight: 300;
+    margin-bottom: -3px;
+
+    @media only screen and (max-width: $bp-small) {
+      font-size: 1.8rem;
+    }
+  }
+
+  &__rating-count {
+    font-size: .8rem;
+    text-transform: uppercase;
+    @media only screen and (max-width: $bp-small) {
+      font-size: .5rem;
+    }
+  }
+}
+
+// button inline
+.btn-inline {
+  border: none;
+  color: var(--color-primary);
+  font-size: inherit;
+  border-bottom: 1px solid currentColor; // takes in current color of the element
+  padding-bottom: 2px;
+  display: inline-block;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all .2s;
+
+  & span {
+    margin-left: 3px;
+    transition: margin-left .2s;
+  }
+
+  &:hover {
+    color: var(--color-grey-dark-1);
+
+    span {
+      margin-left: 8px;
+    }
+  }
+
+  &:focus {
+    outline: none; // you can focus on a button?
+    animation: pulsate 1s infinite;
+  }
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    box-shadow: none;
+  }
+
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 1rem 4rem rgba(0,0,0,.25);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: none;
+  }
+}
+
+//paragraph
+
+// wah???? last-of-type??? no last of child? why finding out just now
+.paragraph:not(:last-of-type) {
+  margin-bottom: 2rem;
+}
+
+// list
+.list {
+  list-style: none;
+  margin: 3rem 0;
+  padding: 3rem 0;
+  border-top: var(--line);
+  border-bottom: var(--line);
+
+  display: flex;
+  flex-wrap: wrap;
+
+  &__item {
+    flex: 0 0 50%; //clever combo with flex-wrap
+    margin-bottom: .7rem;
+  }
+
+  // adding the chevrons
+  &__item::before {
+    content: ""; //rookie mistake
+    display: inline-block;
+    height: 1rem;
+    width: 1rem;
+    margin-right: .7rem;
+
+    // older browsers
+    background-image: url(../img/chevron-thin-right.svg);
+    background-size: cover; //glossed over;
+
+    // newer browsers -masks
+    // lotta work just to make it pink
+    @supports (-webkit-mask-image: url()) or (mask-image: url()) {
+      background-color: var(--color-primary);
+      -webkit-mask-image: url(../img/chevron-thin-right.svg);
+      -webkit-mask-size: cover; //icon covers entire element
+      mask-image: url(../img/chevron-thin-right.svg);
+      mask-size: cover;
+      background-image: none; //weird fix
+    }
+  }
+}
+
+
+// recommend
+.recommend {
+  font-size: 1.3rem;
+  color: var(--color-grey-dark-3);
+
+  display: flex;
+  align-items: center;
+  // justify-content: space-between;
+
+  &__count {
+    margin-right: auto; // why no justify-content space between??
+  }
+
+  &__friends {
+    display: flex;
+  }
+
+  &__photo {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    box-sizing: content-box; // we defaulted it to border-box where the box width contains the margins...
+    // opposite of what we want; so we revert back to content-box where the borders won't shrink the image
+    border: 3px solid #fff; // shrinks image...
+
+
+    //cute overlap effect
+    &:not(:last-child) {
+      margin-right: -2rem;
+    }
+  }
+}
+
+//reviews
+
+.review {
+  background-color: #fff;
+  box-shadow: var(--shadow-light);
+  padding: 3rem;
+  margin-bottom: 3.5rem;
+  position: relative;
+  overflow: hidden;
+
+  @media only screen and (max-width: $bp-medium) {
+    padding: 2rem;
+    margin-right: 3rem;
+  }
+
+  @media only screen and (max-width: $bp-medium) {
+    // padding: 2rem;
+    margin-right: 0;
+  }
+
+  &__text {
+    margin-bottom: 2rem;
+    z-index: 10;
+    position: relative; //for z-index;
+  }
+
+  &__user {
+    display: flex; // check!
+    align-items: center;
+  }
+
+  &__photo {
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 50%;
+    margin-right: 1.5rem;
+  }
+
+  &__user-box {
+    margin-right: auto;
+  }
+
+  &__user-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: .4rem;
+  }
+
+  &__user-date {
+    font-size: 1rem;
+    color: var(--color-grey-dark-3);
+  }
+
+  &__rating {
+    color: var(--color-primary);
+    font-size: 2.2rem;
+    font-weight: 300;
+  }
+
+  &::before {
+    content: "\201C"; // csstricks.com
+    position: absolute;
+    top: -2.7rem;
+    left: -1rem;
+    line-height: 1;
+    font-size: 20rem;
+    color: var(--color-grey-light-2);
+    font-family: sans-serif;
+    z-index: 1;
+  }
+}
+
+// CTA
+.cta {
+  padding: 3.5rem 0;
+  text-align: center;
+
+  @media only screen and (max-width: $bp-medium) {
+    padding: 2.5rem 0;
+  }
+
+  &__book-now {
+    font-size: 2rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+  }
+}
+
+// BUTTON
+.btn {
+  font-size: 1.5rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  border-radius: 100px;
+  border: none;
+  background-image: linear-gradient(to right, var(--color-primary-light), var(--color-primary-dark));
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  // all its child elements
+  & > * {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    transition: all .2s;
+  }
+
+  &__visible {
+    padding: 2rem 7.5rem;
+  }
+
+  &__invisible {
+    position: absolute;
+    padding: 2rem 0; //don't give padding to absolute;
+    left: 0;
+    top: -100%; // move up exactly the size of the element
+  }
+
+  &:hover {
+    background-image: linear-gradient(to left, var(--color-primary-light), var(--color-primary-dark));
+  }
+
+  &:hover &__visible {
+    transform: translateY(100%);
+  }
+
+  &:hover &__invisible {
+    top: 0; // move it back in
+  }
+
+  &:focus {
+    outline: none;
+    animation: pulsate 1s infinite;
+  }
+}
