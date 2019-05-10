@@ -1,15 +1,73 @@
 // COLOR VARIABLES
-$color-primary: #c69963;
-$color-primary-dark: #B28451;
+$color-primary: #c69963; // gold light
+$color-primary-dark: #B28451; // gold dark
 
-$color-secondary: #101d2c;
+$color-secondary: #101d2c; //very dark blue; plays well with gold
 
-$color-grey-light-1: #f9f7f6;
+$color-grey-light-1: #f9f7f6; // grey
 $color-grey-light-2: #aaa;
 
-$color-grey-dark-1: #54483A;
+$color-grey-dark-1: #54483A; // brown
 $color-grey-dark-2: #6D5D4B;
 
 // FONT VARIABLES
 $font-primary: 'Nunito', sans-serif;
 $font-display: 'Josefin Sans', sans-serif;
+
+
+// global resets
+// * == everything
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; // inherits from html directly below
+}
+
+html {
+  box-sizing: border-box; // reference // counts padding
+  font-size: 62.5%; //1rem = 10px; 10px/16px = .625; 16px = 1 rem by default;
+}
+
+body {
+  font-family: $font-primary;
+  color: $color-grey-dark-2;
+  font-weight: 300; //usable since included explicity from google api
+  line-height: 1.6; //not sure why...
+}
+
+// npm start to start errthing...
+// overall grid container
+// bit cleaner to not do it directly on body
+.container { // which is the body itself...
+  & > * { // every direct child inside the container
+    padding: 40px;
+    font-size: 30px;
+  }
+  display: grid;
+  grid-template-rows: 80vh min-content 40vw repeat(3, min-content);
+  // 6 rows
+    // 1: header and top 3 realtors;
+    // 2: features; auto or min-content would provide same result
+    // 3: story__pictures & story__content
+    // 4: homes
+    // 5: gallery
+    // 6: footer
+  // grid-template-columns: repeat(8, 14rem); // 140px 8 of them// 1180 is the magic number
+  grid-template-columns: [sidebar-start] 8rem [sidebar-end full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
+  // [1] 8rem [2] minmax(6rem 1fr) [3] minmax(min-content, 14rem) [4] sx2  [5] sx3 [6] sx4 [7] sx5 [8] sx6 [9] sx7 [10] sx8 [11] minmax(6rem 1fr) [12]
+    // fixed sidebar width...and each column track (8 total) that will at minimum take up min-content or 140px max sandwiched by 60px ~ 1fr
+    // [1]: sidebar-start
+    // [2]: sidebar-end or full-start
+    // [3]: center-start or col-start 1
+    // [4]: col-start 2 or col-end 1
+    // [5]: col-start 3 or col-end 2
+    // [6]: col-start 4 or col-end 3
+    // [7]: col-start 5 or col-end 4
+    // [8]: col-start 6 or col-end 5
+    // [9]: col-start 7 or col-end 6
+    // [10]: col-start 8 or col-end 7
+    // [11]: center-end or col-end 8
+    // [12]: full-end
+}
