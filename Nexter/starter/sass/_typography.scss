@@ -1,0 +1,35 @@
+// mixins vs extend
+
+// heading 1 is copied into this place...
+
+// if heading 1/2/3/4 is copied into this selector
+
+// mixins: pasted into each...
+
+// selectors are copied into each selector..
+
+%heading {
+  font-family: $font-display;
+  font-weight: 400;
+}
+
+.heading-1 {
+  @extend %heading;
+}
+
+.heading-2 {
+  @extend %heading;
+}
+
+.heading-3 {
+  @extend %heading;
+}
+
+.heading-4 {
+  @extend %heading;
+  font-size: 1.9rem;
+
+  &--light { color: $color-grey-light-1; }
+  &--dark { color: $color-grey-dark-1; }
+
+}

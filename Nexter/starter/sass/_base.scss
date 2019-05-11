@@ -41,10 +41,6 @@ body {
 // overall grid container
 // bit cleaner to not do it directly on body
 .container { // which is the body itself...
-  & > * { // every direct child inside the container
-    padding: 40px;
-    font-size: 30px;
-  }
   display: grid;
   grid-template-rows: 80vh min-content 40vw repeat(3, min-content);
   // 6 rows
