@@ -3,15 +3,32 @@
 
   margin: 15rem 0;
 
-  display: grid;
-  // grid-template-columns: repeat(3, 1fr);
-  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr)); // magic no media query method for grid handling
-  grid-gap: 6rem;
-  align-items: start; // default is stretch which doesn't align right sometimes
-  // still kinda weird but really important for aligning items
+
+  // progressive enhancement
+  @supports(display: grid) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr)); // magic no media query method for grid handling
+    grid-gap: 6rem;
+    align-items: start; // default is stretch which doesn't align right sometimes
+    // still kinda weird but really important for aligning items
+  }
 }
 
 .feature {
+
+  // in case of progressive enhancement doesn't exist
+    float: left;
+    width: 33.3333%;
+    margin-bottom: 6rem;
+
+  // if it does have grid; revert all this ie safe code
+  // grid ignores floats, inline-block table-cell vertical alignment
+  @supports(display: grid) {
+    width: auto;
+    margin-bottom: 0;
+  }
+
   // svg icon
   display: grid;
   grid-template-columns: min-content 1fr; // icon width and then fill up rest

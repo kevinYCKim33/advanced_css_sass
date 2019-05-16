@@ -9,7 +9,8 @@
   grid-gap: 1.5rem;
   padding: 1.5rem; // illusion of gutter being outside the grid
 
-
+  // grid-template: repeat(7, 5vw) / repeat(8, 1fr); some shorthand way to do this
+      // row / col; not that useful...just pretty confusing
   &__item {
     &--1 {
       grid-row: 1 / span 2;
