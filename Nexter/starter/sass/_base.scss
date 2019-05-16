@@ -14,6 +14,11 @@ $color-grey-dark-2: #6D5D4B;
 $font-primary: 'Nunito', sans-serif;
 $font-display: 'Josefin Sans', sans-serif;
 
+// RESPONSIVE BREAKPOINTS
+$bp-largest: 75em; // 1200 / 16 = 75em;
+$bp-large: 62.5em; // 1000px
+$bp-medium: 50em; // 800px;
+$bp-small: 37.5em; // 600px;
 
 // global resets
 // * == everything
@@ -28,6 +33,10 @@ $font-display: 'Josefin Sans', sans-serif;
 html {
   box-sizing: border-box; // reference // counts padding
   font-size: 62.5%; //1rem = 10px; 10px/16px = .625; 16px = 1 rem by default;
+
+  @media only screen and (max-width: $bp-largest) {
+    font-size: 50%; // .50 * 16px; // 1rem = 8px
+  }
 }
 
 body {
@@ -66,4 +75,24 @@ body {
     // [10]: col-start 8 or col-end 7
     // [11]: center-end or col-end 8
     // [12]: full-end
+
+    // ALWAYS NAME YOUR COLUMNS IT PREVENTS RESPONSIVE DESIGN FROM BEING A NIGHTMARE!!!
+
+    // media query op to convert sidebar into top navbar
+    // remove the sidebar column; add a new row at top
+    // that easy
+    @media only screen and (max-width: $bp-large) {
+      grid-template-rows: 6rem 80vh min-content 40vw repeat(3, min-content); // new top row of 6rem added;
+      grid-template-columns: [full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
+        // eliminate [sidebar-start] 8rem [sidebar-end]
+    }
+
+    @media only screen and (max-width: $bp-medium) {
+      grid-template-rows: 6rem calc(100vh - 6rem); // set the rest as min-content// no need to explicitly state
+      grid-template-columns: [full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
+        // eliminate [sidebar-start] 8rem [sidebar-end]
+
+    }
+
+
 }

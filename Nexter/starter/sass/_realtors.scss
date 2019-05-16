@@ -1,4 +1,52 @@
 .realtors {
   background-color: $color-secondary;
   grid-column: col-start 7 / full-end; // 9 / 12
+  padding: 3rem;
+
+  display: grid; // two elems, heading, and realtors
+  align-content: center; // align the content of the .realtors
+  justify-content: center; // center the content of the .realtors
+  justify-items: center; // within each cell center it
+  grid-row-gap: 2rem; // gap between top 3 and the realtors
+
+  // realtors get its own full row;
+  @media only screen and (max-width: $bp-medium) {
+    grid-column: 1 / -1; //full-start / full-end;
+  }
+  &__list {
+    display: grid;
+    // justify-content: center;
+    align-items: center; // per grid;
+    grid-template-columns: min-content max-content;
+      // two columns
+      // img | div
+      // img | div
+      // img | div
+      // min-content: so it's just big enough to fit the image
+      // max-content: so the realtor names don't go to nextline
+    grid-column-gap: 2rem;
+    grid-row-gap: 5vh;
+
+    @media only screen and (max-width: $bp-medium) {
+      // too genius;
+      // img | div | img | div | img | div
+      grid-template-columns: repeat(3, min-content max-content);
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      grid-template-columns: min-content max-content; // go back to a realtor a row now
+    }
+  }
+
+  &__img {
+    width: 7rem; // i thought all images need to be percentage?
+    border-radius: 50%;
+    display: block;
+  }
+
+  &__sold {
+    text-transform: uppercase;
+    color: $color-grey-light-2;
+    margin-top: -3px;
+  }
 }

@@ -1,4 +1,90 @@
 .header {
   background-color: $color-grey-dark-1;
   grid-column: full-start / col-end 6; // 2 / 9
+  background-image: linear-gradient(rgba($color-secondary, .93), rgba($color-secondary, .93)), url(../img/hero.jpeg);
+  background-size: cover;
+    // Scales the image as large as possible without stretching the image.
+    // If the proportions of the image differ from the element,
+    // it is cropped either vertically or horizontally so that no empty space remains.
+  background-position: center;
+  padding: 8rem;
+  padding-top: 4rem;
+
+  display: grid;
+  // grid-template-columns: max-content; // set single column to be the max width of the content (i.e. The ulitmate personal freedom)
+  grid-template-columns: minmax(min-content,max-content); // responsive-fix; column should be never smaller than the min content
+  grid-template-rows: 1fr min-content minmax(6rem, min-content) 1fr; // 6rem a hack to give certain cells more margins than others
+    // minmax(6rem, min-content)
+      // this row should never be less than 60px;
+      // this row should never be larger than the min-content
+    // 4 row explicitly defined, 2 others implicitly defined
+
+    // you don't always have to define all the rows folks!
+
+    // some really implicit brilliance going on here
+    // as it stands there are 6 rows
+      // [1] nexter logo (1fr)
+      // [2] h3 your own home (min-content)
+      // [3] h1 the ultimate personal freedom (6rem)
+      // [4] button View our properties (1fr)
+
+      // [5] div Seen on
+      // [6] BBC / Forbes
+    // we only define the 1st row explicitly...
+      // recall we said the 1st row is going to be 80vh from _base.scss
+      // so the nexter logo grid will take up the remaining space
+      // everything else will set an auto height based on its min content
+  grid-row-gap: 1.5rem;
+  justify-content: center;
+
+  // the header gets its full width now; no realtors no sidebar
+  @media only screen and (max-width: $bp-medium) {
+    grid-column: 1 / -1; //full-start / full-end;
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    padding: 5rem;
+  }
+  &__logo {
+    height: 3rem; // interesting not width...
+    justify-self: center;
+  }
+
+  // putting btn in top left corner of its grid cell
+  &__btn {
+    align-self: start; //align-self defaults to stretch...
+    justify-self: start;
+  }
+
+  // --- seen on ---
+  &__seenon-text {
+    display: grid;
+    grid-template-columns: 1fr max-content 1fr;
+    grid-column-gap: 1.5rem;
+    align-items: center;
+    font-size: 1.6rem;
+    color: $color-grey-light-2;
+
+    &::before,
+    &::after {
+      content: "";
+      height: 1px;
+      display: block;
+      background-color: currentColor; // keep forgetting that
+
+    }
+  }
+
+  &__seenon-logos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 3rem;
+    justify-items: center;
+    align-items: center;
+    img {
+      max-height: 2.5rem; // for responsiveness max
+      max-width: 100%;
+      filter: brightness(70%); //wha?? you can do this??
+    }
+  }
 }
